@@ -124,11 +124,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DoubleLinkedList.cpp" />
+    <ClCompile Include="DLList.cpp" />
     <ClCompile Include="laba.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DoubleLinkedList.h" />
+    <ClInclude Include="DLList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

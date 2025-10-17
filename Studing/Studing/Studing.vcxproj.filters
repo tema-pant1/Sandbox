@@ -18,12 +18,12 @@
     <ClCompile Include="laba.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="DoubleLinkedList.cpp">
+    <ClCompile Include="DLList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DoubleLinkedList.h">
+    <ClInclude Include="DLList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
