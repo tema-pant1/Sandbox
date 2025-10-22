@@ -12,20 +12,31 @@ public:
 	Node(data_t data) : data(data), next(nullptr), previous(nullptr) {};
 };
 
+void SetRus()
+{
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+}
+
+void UnsetRus()
+{
+	SetConsoleOutputCP(866);
+	SetConsoleCP(866);
+}
+
 template <typename data_t> class DLList
 {
 	Node<data_t>* head;
 	Node<data_t>* tail;
 	int size;
-	void SetRus()
-	{
-		SetConsoleOutputCP(1251);
-		SetConsoleCP(1251);
-	}
 public:
 	DLList() : head(nullptr), tail(nullptr), size(0) {};
 
 	int GetSize() { return size; }
+
+	Node<data_t>* GetHead() { return head; }
+
+	Node<data_t>* GetTail() { return tail; }
 
 	Node<data_t>* find(int index)
 	{
@@ -33,15 +44,18 @@ public:
 		if (size == 0)
 		{
 			std::cout << "\nОшибка функции find - Списко пуст.\n\n";
+			UnsetRus()
 			return nullptr;
 		}
 		if (index < 0 || index > size)
 		{
 			std::cout << "\nОшибка функции find - Неправильный индекс.\n\n";
+			UnsetRus()
 			return nullptr;
 		}
 		Node<data_t>* cur_node = head;
 		for (int cur_indx = 1; cur_indx <= index; cur_indx++) cur_node = cur_node->next;
+		UnsetRus()
 		return cur_node;
 	}
 
@@ -56,7 +70,7 @@ public:
 		while (cur_node != nullptr)
 		{
 			std::cout << "[" << cur_node->data << "]";
-			if (cur_node->next != nullptr) std::cout << "->";
+			if (cur_node->next != nullptr) std::cout << "<->";
 			cur_node = cur_node->next;
 		}
 
@@ -64,13 +78,13 @@ public:
 
 	void status()
 	{
-		SetConsoleOutputCP(1251);
-		SetConsoleCP(1251);
+		SetRus()
 		show();
 		std::cout << "\nРазмер списка - " << GetSize();
-		if (GetSize() == 0)
+		if (size == 0)
 		{
 			std::cout << "\nСписок пустой\n";
+			UnsetRus()
 			return;
 		}
 		else
@@ -78,8 +92,7 @@ public:
 			std::cout << "\nГолова - [" << head->data << "]";
 			std::cout << "\nХвост - [" << tail->data << "]" << "\n\n";
 		}
-		/*	SetConsoleOutputCP(866);
-			SetConsoleCP(866);*/
+		UnsetRus()
 	}
 
 	void push_back(data_t data)
@@ -105,9 +118,9 @@ public:
 
 		if (index < 0 || index > size)
 		{
-			SetConsoleOutputCP(1251);
-			SetConsoleCP(1251);
+			SetRus()
 			std::cout << "Ошибка: Некорректный индекс\n\n";
+			UnsetRus()
 			return;
 		}
 		if (index == 0)
@@ -133,4 +146,52 @@ public:
 			size++;
 		}
 	}
+
+	void earase(int index)
+	{
+		if (size == 0)
+		{
+			SetRus();
+			std::cout << "\nОшибка функции pop - Список пустой\n\n";
+			UnsetRus()
+			return;
+		}
+		if (index < 0 || index > size)
+		{
+			SetRus();
+			std::cout << "\nОшибка функции pop - Неправильный индекс\n\n";
+			UnsetRus()
+			return;
+		}
+		if (index == 0)
+		{
+			Node<data_t>* new_head = head->next;
+			new_head->previous = nullptr;
+			delete head;
+			head = new_head;
+			size--;
+			return;
+		}
+		if (index == size - 1)
+		{
+			Node<data_t>* new_tail = tail->previous;
+			new_tail->next = nullptr;
+			delete tail;
+			tail = new_tail;
+			size--;
+			return;
+		}
+		else
+		{
+			Node<data_t>* deleted_node = find(index);
+			Node<data_t>* prev_node = deleted_node->previous;
+			Node<data_t>* next_node = deleted_node->next;
+			prev_node->next = next_node;
+			next_node->previous = prev_node;
+			delete deleted_node;
+			size--;
+			return;
+		}
+	}
 };
+

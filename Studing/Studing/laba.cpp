@@ -1,18 +1,28 @@
 #include <iostream>
 #include "DLList.h"
 #include <windows.h>
+#include "Stack.h"
+#include "DynArray.h"
 
 using namespace std;
 
 int main()
 {
-	SetConsoleOutputCP(1251);
-	SetConsoleCP(1251);
+	SetRus();
 
-	DLList<int> list;
-	for (int i = 0; i < 5; i++) list.push_back(i * i);
-	list.status();
-	list.insert(52, 52);
-	list.status();
+	DynamicArray<int> dinara;
+	for (int i = 0; i < 8; i++)
+	{
+		dinara.push_back(i * i);
+	}
+
+	dinara.status();
+
+	dinara.remove(8);
+
+	dinara.status();
+
+
+
 	return 0;
 }
