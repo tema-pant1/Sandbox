@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "DLList.h"
+#include "features.h"
 
 template <typename data_t> class DynamicArray
 {
@@ -9,6 +9,20 @@ template <typename data_t> class DynamicArray
 	int capacity;
 public:
 	DynamicArray() : data(new data_t[2]), size(0), capacity(2) {};
+
+	int GetSize() { return size; }
+
+	void Get(int index, data_t& result)
+	{
+		SetRus();
+		if (index < 0 || index >= size)
+		{
+			std::cout << "\nОшбика функции Get - неправильный индекс\n\n";
+			UnsetRus();
+			return;
+		}
+		result = data[index];
+	}
 
 	void show()
 	{
@@ -21,8 +35,18 @@ public:
 		{
 			std::cout << "[";
 			for (int i = 0; i < size - 1; i++) std::cout << data[i] << ", ";
-			std::cout << data[size-1] << "]\n";
+			std::cout << data[size - 1] << "]\n";
 		}
+	}
+
+	void copy(data_t* input, int size, data_t* output)
+	{
+		for (int i = 0; i < size; i++) output[i] = input[i];
+	}
+
+	void shift_elem_r(data_t* array, int index)
+	{
+		for (int i = size; i != index; i--) array[i] = array[i - 1];
 	}
 
 	void status()
@@ -30,13 +54,14 @@ public:
 		SetRus();
 		show();
 		std::cout << "Занято " << size << " из " << capacity << "\n\n";
-		UnsetRus()
+		UnsetRus();
 	}
 
 	void resize()
 	{
 		data_t* new_arr = new data_t[capacity * 2];
-		std::copy(data, data + capacity, new_arr);
+		copy(data, size, new_arr);
+		delete[] data;
 		data = new_arr;
 		capacity *= 2;
 	}
@@ -54,47 +79,47 @@ public:
 		if (index < 0 || index > size)
 		{
 			std::cout << "\nОшибка функции insert - Некорректный индекс\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		if (index == size)
 		{
 			push_back(elem);
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		if (size == capacity) resize();
-		data_t* new_arr = new data_t[capacity];
-		std::copy(data, data + index, new_arr);
-		std::copy(data + index, data + size, new_arr + index + 1);
-		new_arr[index] = elem;
-		delete[] data;
-		data = new_arr;
+		shift_elem_r(data, index);
+		data[index] = elem;
 		size++;
-		UnsetRus()
+		UnsetRus();
+	}
+
+	void shift_elem_l(data_t* array, int index)
+	{
+		for (int i = index; i < size - 1; i++)
+		{
+			array[i] = array[i + 1];
+		}
 	}
 
 	void remove(int index)
 	{
 		if (size == 0)
 		{
-			SetRus()
+			SetRus();
 			std::cout << "\nОшибка функции remove - нельзя удалить элемент из пустого списка\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		if (index < 0 || index >= size)
 		{
-			SetRus()
+			SetRus();
 			std::cout << "\nОшибка функции remove - неправильный индекс\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
-		data_t* new_arr = new data_t[capacity];
-		std::copy(data, data + index, new_arr);
-		std::copy(data + index + 1, data + size, new_arr + index);
-		delete[] data;
-		data = new_arr;
+		shift_elem_l(data, index);
 		size--;
 	}
 };

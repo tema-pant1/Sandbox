@@ -1,5 +1,6 @@
 #pragma once
 #include "DLList.h"
+#include "features.h"
 
 template <typename data_t> class stack {
 	Node<data_t>* current;
@@ -8,6 +9,14 @@ public:
 	stack() : current(nullptr), size(0) {};
 
 	int GetSize() { return size; }
+
+	bool is_empty()
+	{
+		if (size == 0) return true;
+		return false;
+	}
+
+	data_t top() { return current->data; }
 
 	void show()
 	{
@@ -28,18 +37,18 @@ public:
 
 	void status()
 	{
-		SetRus()
+		SetRus();
 		show();
 		if (size == 0) 
 		{
 			std::cout << "\nСтек пуст\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		else
 		{
 			std::cout << "\nСледующий в очереди - [" << current->data << "]\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 	}
@@ -58,7 +67,7 @@ public:
 		{
 			SetRus();
 			std::cout << "\nОшибка функции pop - Нельзя удалить элемнет из пустого стека\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		else
@@ -67,6 +76,7 @@ public:
 			current = current->next;
 			delete del_node;
 			size--;
+			return;
 		}
 	}
 };

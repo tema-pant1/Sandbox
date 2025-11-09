@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <windows.h>
+#include "features.h"
 
 template <typename data_t> class Node
 {
@@ -12,17 +13,6 @@ public:
 	Node(data_t data) : data(data), next(nullptr), previous(nullptr) {};
 };
 
-void SetRus()
-{
-	SetConsoleOutputCP(1251);
-	SetConsoleCP(1251);
-}
-
-void UnsetRus()
-{
-	SetConsoleOutputCP(866);
-	SetConsoleCP(866);
-}
 
 template <typename data_t> class DLList
 {
@@ -44,18 +34,18 @@ public:
 		if (size == 0)
 		{
 			std::cout << "\nОшибка функции find - Списко пуст.\n\n";
-			UnsetRus()
+			UnsetRus();
 			return nullptr;
 		}
 		if (index < 0 || index > size)
 		{
 			std::cout << "\nОшибка функции find - Неправильный индекс.\n\n";
-			UnsetRus()
+			UnsetRus();
 			return nullptr;
 		}
 		Node<data_t>* cur_node = head;
 		for (int cur_indx = 1; cur_indx <= index; cur_indx++) cur_node = cur_node->next;
-		UnsetRus()
+		UnsetRus();
 		return cur_node;
 	}
 
@@ -78,13 +68,13 @@ public:
 
 	void status()
 	{
-		SetRus()
+		SetRus();
 		show();
 		std::cout << "\nРазмер списка - " << GetSize();
 		if (size == 0)
 		{
 			std::cout << "\nСписок пустой\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		else
@@ -92,7 +82,7 @@ public:
 			std::cout << "\nГолова - [" << head->data << "]";
 			std::cout << "\nХвост - [" << tail->data << "]" << "\n\n";
 		}
-		UnsetRus()
+		UnsetRus();
 	}
 
 	void push_back(data_t data)
@@ -118,9 +108,9 @@ public:
 
 		if (index < 0 || index > size)
 		{
-			SetRus()
+			SetRus();
 			std::cout << "Ошибка: Некорректный индекс\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		if (index == 0)
@@ -153,14 +143,14 @@ public:
 		{
 			SetRus();
 			std::cout << "\nОшибка функции pop - Список пустой\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		if (index < 0 || index > size)
 		{
 			SetRus();
 			std::cout << "\nОшибка функции pop - Неправильный индекс\n\n";
-			UnsetRus()
+			UnsetRus();
 			return;
 		}
 		if (index == 0)

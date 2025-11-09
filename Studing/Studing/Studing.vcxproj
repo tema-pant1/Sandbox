@@ -124,11 +124,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fatures.cpp" />
     <ClCompile Include="laba.cpp" />
+    <ClCompile Include="SortStation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DLList.h" />
     <ClInclude Include="DynArray.h" />
+    <ClInclude Include="features.h" />
+    <ClInclude Include="SortStation.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
