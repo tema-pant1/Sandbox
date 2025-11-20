@@ -125,8 +125,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="fatures.cpp" />
-    <ClCompile Include="laba.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="SortStation.cpp" />
+    <ClCompile Include="TImsort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DLList.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="features.h" />
     <ClInclude Include="SortStation.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="Timsort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

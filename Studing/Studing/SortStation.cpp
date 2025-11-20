@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <stdio.h>
+#include <cmath>
 
 #include "features.h"
 #include "Stack.h"
@@ -87,8 +88,7 @@ double calculate_RPN(DynamicArray<std::string> expression)
 	stack<double> numbers;
 	for (int i = 0; i < expression.GetSize(); i++)
 	{
-		std::string token;
-		expression.Get(i, token);
+		std::string token = expression[i];
 		double a, b, oprtr_rslt(0);
 		if (is_num(token))
 		{
