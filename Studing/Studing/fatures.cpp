@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <cmath>
+#include <random>
 
 void SetRus()
 {
@@ -52,4 +53,12 @@ void str_to_int(std::string str, int& result)
 		result += digit * (int)pow(10, deg++);
 	}
 	if (str[0] == '-') result *= -1;
+}
+
+int random(int mn, int mx)
+{
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dist(mn, mx);
+	return dist(gen);
 }
